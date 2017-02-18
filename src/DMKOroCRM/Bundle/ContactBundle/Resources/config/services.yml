@@ -17,4 +17,5 @@ services:
     dmkorocrm_contact.task.normalizer:
         class: "%dmkorocrm_contact.birthday.normalizer.class%"
         arguments:
+            - "@translator"
             - "@oro_reminder.entity.manager"

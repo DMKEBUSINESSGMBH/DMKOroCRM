@@ -2,4 +2,5 @@ dmkorocrm:
     contact:
         action.add_calendar.title:  Add birthday event
         menu.birthdays:             Birthdays
-
+    calendar.bornOn:                Born on the
+    calendar.birthday:              birthday

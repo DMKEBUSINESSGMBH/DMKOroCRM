@@ -5,18 +5,22 @@ namespace DMKOroCRM\Bundle\ContactBundle\Provider;
 use Doctrine\ORM\AbstractQuery;
 
 use Oro\Bundle\ReminderBundle\Entity\Manager\ReminderManager;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class BirthdayCalendarNormalizer
 {
     /** @var ReminderManager */
     protected $reminderManager;
+    /** @var TranslatorInterface */
+    protected $translator;
 
     /**
      * @param ReminderManager $reminderManager
      */
-    public function __construct(ReminderManager $reminderManager)
+    public function __construct(TranslatorInterface $translator, ReminderManager $reminderManager)
     {
-        $this->reminderManager = $reminderManager;
+    	$this->translator      = $translator;
+    	$this->reminderManager = $reminderManager;
     }
 
     /**
@@ -32,20 +36,24 @@ class BirthdayCalendarNormalizer
         $yearStart = $start->format('Y');
         $yearEnd = $end->format('Y');
 
+        $labelBirthday = $this->translator->trans('dmkorocrm.calendar.birthday');
+        $labelBornAt = $this->translator->trans('dmkorocrm.calendar.bornOn');
+        $tzUTC  = new \DateTimeZone('UTC');
         $items  = $query->getArrayResult();
         foreach ($items as $item) {
             $calDay = (int) $item['birthdaycal'];
             $year = $calDay > (int)$start->format('md') ? $yearStart : $yearEnd;
-        	/** @var \DateTime $start */
-            $day = $item['birthday'];
+            /** @var \DateTime $birthday */
+            $birthday = $item['birthday'];
             // Das Jahr ersetzen
-            $day = $year . substr($day->format('c'), 4);
+            $day = $year . substr($birthday->format('c'), 4);
+            $age = $birthday->diff(new \DateTime($day, $tzUTC))->y;
 
             $result[] = [
                 'calendar'    => $calendarId,
                 'id'          => $item['id'],
-                'title'       => $item['firstName'] . ' ' .$item['lastName'],
-                'description' => 'Birthday',
+                'title'       => $item['firstName'] . ' ' .$item['lastName']. "\n(". $age. '. '.$labelBirthday.')',
+                'description' => $labelBornAt.' <b>'.$birthday->format('d.m.Y').'</b>',
                 'start'       => $day,
                 'end'         => $day,
                 'allDay'      => true,
@@ -55,8 +63,6 @@ class BirthdayCalendarNormalizer
                 'removable'   => false
             ];
         }
-//print_r(['start' => $start->format('Y-m-d'), 'end' => $end->format('Y-m-d'), 'c' => count($result)]);
-//        $this->reminderManager->applyReminders($result, 'OroCRM\Bundle\TaskBundle\Entity\Task');
 
         return $result;
     }

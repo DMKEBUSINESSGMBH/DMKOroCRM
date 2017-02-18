@@ -124,33 +124,31 @@ class BirthdayCalendarProvider extends AbstractCalendarProvider
         /** @var ContactRepository $repo */
         $repo = $this->doctrineHelper->getEntityRepository('OroCRMContactBundle:Contact');
 
+        $selectCols = 'c.id, c.firstName, c.lastName, c.birthday, c.birthdaycal, c.createdAt, c.updatedAt';
         if($startDate->format('Y') != $endDate->format('Y')) {
-
-        	$qb = $repo->createQueryBuilder('c')
-	        	->select('c.id, c.firstName, c.lastName, c.birthday, c.birthdaycal, c.createdAt, c.updatedAt')
-	        	->where('c.birthdaycal >= :start1 AND c.birthdaycal <= :end1 OR
-	        			c.birthdaycal >= :start2 AND c.birthdaycal <= :end2')
-	        	->setParameter('start1', $startDate->format('md'))
-	        	->setParameter('end1', '1231')
-	        	->setParameter('start2', '0101')
-	        	->setParameter('end2', $endDate->format('md'))
+            $qb = $repo->createQueryBuilder('c')
+		    	->select($selectCols)
+		        ->where('c.birthdaycal >= :start1 AND c.birthdaycal <= :end1 OR
+		        		c.birthdaycal >= :start2 AND c.birthdaycal <= :end2')
+		        ->setParameter('start1', $startDate->format('md'))
+		        ->setParameter('end1', '1231')
+		        ->setParameter('start2', '0101')
+		        ->setParameter('end2', $endDate->format('md'))
         	;
         }
         else {
-        	$qb = $repo->createQueryBuilder('c')
-	        	->select('c.id, c.firstName, c.lastName, c.birthdaycal, c.createdAt, c.updatedAt')
-	        	->where('c.birthdaycal >= :start AND c.birthdaycal <= :end')
-//	    	->where('MONTH(c.birthday) = :start ')
-	        	->setParameter('start', $startDate->format('md'))
-	        	->setParameter('end', $endDate->format('md'))
+            $qb = $repo->createQueryBuilder('c')
+			    ->select($selectCols)
+			    ->where('c.birthdaycal >= :start AND c.birthdaycal <= :end')
+			    ->setParameter('start', $startDate->format('md'))
+			    ->setParameter('end', $endDate->format('md'))
         	;
         }
-    	if ($extraFields) {
-    		foreach ($extraFields as $field) {
-    			$qb->addSelect('c.' . $field);
-    		}
-    	}
-//    	print_r('SQL ' . $qb->getQuery()->getSQL() . ' - ' .$startDate->format('Y-m-d') . ' - '. $endDate->format('Y-m-d'));
+	    if ($extraFields) {
+	        foreach ($extraFields as $field) {
+	            $qb->addSelect('c.' . $field);
+		    }
+	    }
 
     	return $qb;
     }
