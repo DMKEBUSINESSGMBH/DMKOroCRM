@@ -1,0 +1,32 @@
+{% import 'OroUIBundle::macros.html.twig' as UI %}
+
+{% set dialogTitle = entity.birthdaycal > 0 ? 
+		'dmkorocrm.contact.action.remove_calendar.title'|trans : 'dmkorocrm.contact.action.add_calendar.title'|trans %}
+
+{% set icon = entity.birthdaycal > 0 ? 
+		'icon-minus-sign' : 'icon-plus-sign' %}
+
+{{ UI.clientLink({
+      	'dataUrl': path('dmkorocrm_contact_addcalender', { 'contactId': entity.id }),
+      	'aCss': 'no-hash',
+      	'iCss': icon,
+      	'dataId': entity.id,
+      	'title' : dialogTitle,
+      	'label' : dialogTitle,
+      	'widget' : {
+          	'type' : 'dialog',
+          	'multiple' : false,
+          	'options' : {
+              	'stateEnabled': false,
+              	'dialogOptions' : {
+                  	'title' : dialogTitle,
+                  	'allowMaximize': true,
+                  	'allowMinimize': true,
+                  	'dblclick': 'maximize',
+                  	'maximizedHeightDecreaseBy': 'minimize-bar',
+                  	'width': 600
+              	}
+          	}
+      	}
+  	})
+}}

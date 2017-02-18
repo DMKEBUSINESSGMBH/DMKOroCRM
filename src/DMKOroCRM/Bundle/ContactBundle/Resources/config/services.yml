@@ -19,3 +19,12 @@ services:
         arguments:
             - "@translator"
             - "@oro_reminder.entity.manager"
+
+    dmkorocrm_contact.calendar_add.widget_provider.actions:
+        parent: oro_ui.widget_provider.action_button.abstract
+        arguments:
+            - dmkorocrm_contact_calendar_add_button
+            - dmkorocrm_contact_calendar_add_link
+        tags:
+            - { name: oro_ui.view_action_provider, group: activity, priority: 100 }
+            - { name: oro_ui.update_action_provider, group: activity, priority: 100 }
