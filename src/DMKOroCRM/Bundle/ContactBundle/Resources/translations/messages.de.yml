@@ -1,0 +1,5 @@
+dmkorocrm:
+    contact:
+        action.add_calendar.title:  Zum Geburtstagskalender
+        menu.birthdays:             Geburtstage
+

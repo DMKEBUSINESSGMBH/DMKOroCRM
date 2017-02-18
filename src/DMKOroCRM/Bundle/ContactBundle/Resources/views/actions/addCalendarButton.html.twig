@@ -1,0 +1,27 @@
+{% import 'OroUIBundle::macros.html.twig' as UI %}
+
+{% set dialogTitle = 'dmkorocrm.contact.action.add_calendar.title'|trans %}
+{{ UI.clientButton({
+      	'dataUrl': path('dmkorocrm_contact_addcalender', { 'contactId': entity.id }),
+      	'aCss': 'no-hash',
+      	'iCss': 'icon-plus-sign',
+      	'dataId': entity.id,
+      	'title' : dialogTitle,
+      	'label' : dialogTitle,
+      	'widget' : {
+          	'type' : 'dialog',
+          	'multiple' : false,
+          	'options' : {
+              	'stateEnabled': false,
+              	'dialogOptions' : {
+                  	'title' : dialogTitle,
+                  	'allowMaximize': true,
+                  	'allowMinimize': true,
+                  	'dblclick': 'maximize',
+                  	'maximizedHeightDecreaseBy': 'minimize-bar',
+                  	'width': 600
+              	}
+          	}
+      	}
+  	})
+}}

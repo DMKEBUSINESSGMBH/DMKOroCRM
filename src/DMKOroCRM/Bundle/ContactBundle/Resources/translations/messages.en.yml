@@ -1,0 +1,5 @@
+dmkorocrm:
+    contact:
+        action.add_calendar.title:  Add birthday event
+        menu.birthdays:             Birthdays
+

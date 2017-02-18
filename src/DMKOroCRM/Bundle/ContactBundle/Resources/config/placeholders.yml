@@ -1,0 +1,11 @@
+placeholders:
+    view_navButtons_before:
+        items:
+            add_calendar_button:
+                order: 10
+
+items:
+    add_calendar_button:
+        template: DMKOroCRMContactBundle:actions:addCalendarButton.html.twig
+        applicable: "@oro_ui.placeholder.filter->isInstanceOf($entity$, %orocrm_contact.entity.class%)"
+        

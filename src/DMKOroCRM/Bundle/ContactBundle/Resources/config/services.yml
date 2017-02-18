@@ -1,0 +1,20 @@
+parameters:
+    dmkorocrm_contact.calendar_provider.class:            DMKOroCRM\Bundle\ContactBundle\Provider\BirthdayCalendarProvider
+    dmkorocrm_contact.birthday.normalizer.class:           DMKOroCRM\Bundle\ContactBundle\Provider\BirthdayCalendarNormalizer
+
+services:
+
+    dmkorocrm_contact.calendar_provider:
+        class: "%dmkorocrm_contact.calendar_provider.class%"
+        arguments:
+            - "@oro_entity.doctrine_helper"
+            - "@oro_security.acl_helper"
+            - "@dmkorocrm_contact.task.normalizer"
+            - "@translator"
+        tags:
+            - { name: oro_calendar.calendar_provider, alias: birthdays }
+
+    dmkorocrm_contact.task.normalizer:
+        class: "%dmkorocrm_contact.birthday.normalizer.class%"
+        arguments:
+            - "@oro_reminder.entity.manager"

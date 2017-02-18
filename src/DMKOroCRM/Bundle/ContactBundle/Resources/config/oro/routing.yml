@@ -1,0 +1,4 @@
+dmkorocrm_contact_bundle:
+    resource:     "@DMKOroCRMContactBundle/Controller"
+    type:         annotation
+    prefix:       /dmkorocrm

@@ -1,0 +1,2 @@
+bundles:
+    - { name: DMKOroCRM\Bundle\ContactBundle\DMKOroCRMContactBundle, priority: 500 }
