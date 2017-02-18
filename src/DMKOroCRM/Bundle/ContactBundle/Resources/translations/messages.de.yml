@@ -1,7 +1,10 @@
 dmkorocrm:
     contact:
-        action.add_calendar.title:  Zum Geburtstagskalender
-        menu.birthdays:             Geburtstage
-    calendar.bornOn:                Geboren am
-    calendar.birthday:              Geburtstag
+        action.remove_calendar.title:  Vom Kalender entfernen
+        action.add_calendar.title:     Zum Geburtstagskalender
+        msg.birthday_added:            Geburtstag zum Kalender hinzugefügt
+        msg.birthday_removed:          Geburtstag vom Kalender entfernt
+        menu.birthdays:                Wichtige Geburtstage
+    calendar.bornOn:                   Geboren am
+    calendar.birthday:                 Geburtstag
 

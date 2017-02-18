@@ -64,7 +64,7 @@ class BirthdayCalendarProvider extends AbstractCalendarProvider
                 'calendarName'    => $this->translator->trans($this->calendarLabels[self::BIRTHDAY_CALENDAR_ID]),
                 'removable'       => false,
                 'position'        => -100,
-                'backgroundColor' => '#F83A22',
+                'backgroundColor' => '#9A9CFF',
                 'options'         => [
 //                     'widgetRoute'   => 'orocrm_task_widget_info',
 //                     'widgetOptions' => [

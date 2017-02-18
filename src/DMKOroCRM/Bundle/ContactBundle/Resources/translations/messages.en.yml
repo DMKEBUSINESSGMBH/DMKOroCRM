@@ -1,6 +1,9 @@
 dmkorocrm:
     contact:
-        action.add_calendar.title:  Add birthday event
-        menu.birthdays:             Birthdays
-    calendar.bornOn:                Born on the
-    calendar.birthday:              birthday
+        action.remove_calendar.title:  Remove birthday event
+        action.add_calendar.title:     Add birthday event
+        msg.birthday_added:            Birthday added to calendar
+        msg.birthday_removed:          Birthday removed from calendar
+        menu.birthdays:                Important birthdays
+    calendar.bornOn:                   Born on the
+    calendar.birthday:                 birthday
