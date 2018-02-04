@@ -10,9 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 use Oro\Bundle\SecurityBundle\Annotation\AclAncestor;
-use DMKClub\Bundle\MemberBundle\Entity\Member;
-use DMKClub\Bundle\MemberBundle\Entity\MemberFeeDiscount;
-use OroCRM\Bundle\ContactBundle\Entity\Contact;
+use Oro\Bundle\ContactBundle\Entity\Contact;
 
 class CalendarController extends Controller
 {

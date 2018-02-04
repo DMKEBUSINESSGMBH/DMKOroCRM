@@ -4,7 +4,7 @@
 		'dmkorocrm.contact.action.remove_calendar.title'|trans : 'dmkorocrm.contact.action.add_calendar.title'|trans %}
 
 {% set icon = entity.birthdaycal > 0 ? 
-		'icon-minus-sign' : 'icon-plus-sign' %}
+		'fa-minus-circle' : 'fa-plus-circle' %}
 
 {{ UI.clientLink({
       	'dataUrl': path('dmkorocrm_contact_addcalender', { 'contactId': entity.id }),

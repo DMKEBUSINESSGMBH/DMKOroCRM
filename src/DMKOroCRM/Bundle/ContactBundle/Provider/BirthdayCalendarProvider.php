@@ -4,12 +4,12 @@ namespace DMKOroCRM\Bundle\ContactBundle\Provider;
 
 use Symfony\Component\Translation\TranslatorInterface;
 
+use Doctrine\ORM\QueryBuilder;
+
 use Oro\Bundle\EntityBundle\ORM\DoctrineHelper;
 use Oro\Bundle\SecurityBundle\ORM\Walker\AclHelper;
 use Oro\Bundle\CalendarBundle\Provider\AbstractCalendarProvider;
-
-use OroCRM\Bundle\TaskBundle\Entity\Repository\TaskRepository;
-use OroCRM\Bundle\ContactBundle\Entity\Repository\ContactRepository;
+use Oro\Bundle\ContactBundle\Entity\Contact;
 
 class BirthdayCalendarProvider extends AbstractCalendarProvider
 {
@@ -99,7 +99,7 @@ class BirthdayCalendarProvider extends AbstractCalendarProvider
         }
 
         if ($this->isCalendarVisible($connections, self::BIRTHDAY_CALENDAR_ID)) {
-            $extraFields = $this->filterSupportedFields($extraFields, 'OroCRM\Bundle\ContactBundle\Entity\Contact');
+            $extraFields = $this->filterSupportedFields($extraFields, 'Oro\Bundle\ContactBundle\Entity\Contact');
             $qb          = $this->getContactListByTimeIntervalQueryBuilder($userId, $start, $end, $extraFields);
             $query       = $this->aclHelper->apply($qb);
 
@@ -121,8 +121,8 @@ class BirthdayCalendarProvider extends AbstractCalendarProvider
      */
     protected function getContactListByTimeIntervalQueryBuilder($userId, $startDate, $endDate, $extraFields = [])
     {
-        /** @var ContactRepository $repo */
-        $repo = $this->doctrineHelper->getEntityRepository('OroCRMContactBundle:Contact');
+        /* @var \Oro\Bundle\ContactBundle\Entity\Repository\ContactRepository $repo */
+        $repo = $this->doctrineHelper->getEntityRepository(Contact::class);
 
         $selectCols = 'c.id, c.firstName, c.lastName, c.birthday, c.birthdaycal, c.createdAt, c.updatedAt';
         if($startDate->format('Y') != $endDate->format('Y')) {
