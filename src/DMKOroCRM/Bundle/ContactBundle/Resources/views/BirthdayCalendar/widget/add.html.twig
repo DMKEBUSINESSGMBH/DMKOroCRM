@@ -3,7 +3,7 @@
 {% set msg = added ? 'dmkorocrm.contact.msg.birthday_added'|trans : 'dmkorocrm.contact.msg.birthday_removed'|trans %}
 
         <script type="text/javascript">
-        require(['underscore', 'orotranslation/js/translator', 'oroui/js/widget-manager',
+        loadModules(['underscore', 'orotranslation/js/translator', 'oroui/js/widget-manager',
                  'oroui/js/messenger', 'oroui/js/mediator'],
         function(_, __, widgetManager, messenger, mediator) {
             widgetManager.getWidgetInstance({{ app.request.get('_wid')|json_encode|raw }}, function(widget) {

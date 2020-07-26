@@ -4,8 +4,8 @@ placeholders:
     items:
         dmkorocrm_contact_calendar_add_button:
             template: DMKOroCRMContactBundle:actions:addCalendarButton.html.twig
-            applicable: '@oro_ui.placeholder.filter->isInstanceOf($entity$, \Oro\Bundle\ContactBundle\Entity::class)'
+            applicable: '@oro_ui.placeholder.filter->isInstanceOf($entity$, Oro\Bundle\ContactBundle\Entity\Contact)'
     
         dmkorocrm_contact_calendar_add_link:
             template: DMKOroCRMContactBundle:actions:addCalendarLink.html.twig
-            applicable: '@oro_ui.placeholder.filter->isInstanceOf($entity$, \Oro\Bundle\ContactBundle\Entity::class)'
+            applicable: '@oro_ui.placeholder.filter->isInstanceOf($entity$, Oro\Bundle\ContactBundle\Entity\Contact)'
