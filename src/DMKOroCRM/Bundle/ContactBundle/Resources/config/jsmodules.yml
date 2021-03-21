@@ -1,0 +1,3 @@
+dynamic-imports:
+   dmkorocrmcontact:
+      - oroui/js/widget-manager

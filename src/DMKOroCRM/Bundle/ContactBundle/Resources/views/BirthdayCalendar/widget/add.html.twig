@@ -1,18 +1,17 @@
 <div class="widget-content">
 
 {% set msg = added ? 'dmkorocrm.contact.msg.birthday_added'|trans : 'dmkorocrm.contact.msg.birthday_removed'|trans %}
-
         <script type="text/javascript">
-        loadModules(['underscore', 'orotranslation/js/translator', 'oroui/js/widget-manager',
-                 'oroui/js/messenger', 'oroui/js/mediator'],
-        function(_, __, widgetManager, messenger, mediator) {
-            widgetManager.getWidgetInstance({{ app.request.get('_wid')|json_encode|raw }}, function(widget) {
-                messenger.notificationFlashMessage('success', __( '{{msg}}' ));
+        loadModules(['underscore', 'orotranslation/js/translator',
+                 'oroui/js/messenger', 'oroui/js/mediator', 'oroui/js/widget-manager'],
+        function(_, __, messenger, mediator, widgetManager) {
+        	widgetManager.getWidgetInstance({{ app.request.get('_wid')|json_encode|raw }}, function(widget) {
+                messenger.notificationFlashMessage('success', '{{msg}}' );
                 mediator.trigger('widget_success:' + widget.getAlias());
                 mediator.trigger('widget_success:' + widget.getWid());
                 widget.remove();
             });
+
         });
         </script>
-
 </div>
