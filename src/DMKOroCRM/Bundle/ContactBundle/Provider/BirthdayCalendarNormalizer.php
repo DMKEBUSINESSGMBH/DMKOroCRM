@@ -5,7 +5,7 @@ namespace DMKOroCRM\Bundle\ContactBundle\Provider;
 use Doctrine\ORM\AbstractQuery;
 
 use Oro\Bundle\ReminderBundle\Entity\Manager\ReminderManager;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class BirthdayCalendarNormalizer
 {
@@ -43,8 +43,14 @@ class BirthdayCalendarNormalizer
         foreach ($items as $item) {
             $calDay = (int) $item['birthdaycal'];
             $year = $calDay > (int)$start->format('md') ? $yearStart : $yearEnd;
+            $missing = false;
             /** @var \DateTime $birthday */
             $birthday = $item['birthday'];
+            if (!$birthday) {
+                // Fallback für Fehlerfall
+                 $birthday = $start;
+                 $missing = true;
+            }
             // Das Jahr ersetzen
             $day = $year . substr($birthday->format('c'), 4);
             $age = $birthday->diff(new \DateTime($day, $tzUTC))->y;
@@ -52,7 +58,7 @@ class BirthdayCalendarNormalizer
             $result[] = [
                 'calendar'    => $calendarId,
                 'id'          => $item['id'],
-                'title'       => $item['firstName'] . ' ' .$item['lastName']. "\n(". $age. '. '.$labelBirthday.')',
+                'title'       => $missing ? sprintf('Contact %d has no birthday', $item['id']) : $item['firstName'] . ' ' .$item['lastName']. "\n(". $age. '. '.$labelBirthday.')',
                 'description' => $labelBornAt.' <b>'.$birthday->format('d.m.Y').'</b>',
                 'start'       => $day,
                 'end'         => $day,
